@@ -1,0 +1,700 @@
+:root {
+    --background-color:  #383838;
+    --text-color: #ffffff;
+
+    /* Основна палітра */
+  --color-white: #ffffff;
+  --color-graphite-dark: #2f2f2f;
+  --color-graphite: #383838;
+  --color-text-secondary: #555555;
+
+  /* Фони та бордери */
+  --color-bg-light: #f9f9f9;
+  --color-bg-hover: #f1f1f1;
+  --color-border: #c0c0c0;
+  --color-shadow: rgba(0, 0, 0, 0.05);
+
+  /* Акценти */
+  --color-accent: yellow;
+
+  /* Контейнер */
+  --container-max-width: 1200px;
+
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+   
+    color: var(--text-color);
+}
+
+.header {
+ position: relative; /* за замовчуванням, можна не писати */
+  z-index: 1;       /* зверху всіх інших елементів */
+    background-color: var(--color-graphite);
+    padding: 20px 0;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__list {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.header__logo {
+     border-radius:50%;
+}
+
+.header__burger {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.header__burger-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--text-color);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.header__burger.open .header__burger-icon {
+  transform: rotate(90deg) scale(1.05);
+}
+
+/* Desktop default for nav */
+.header__nav { display: block; }
+
+/* Mobile: full-screen overlay + centered panel */
+@media (max-width: 768px) {
+  .header__burger { display: inline-flex; }
+
+  .header__nav {
+    position: fixed;
+    display: none;
+    z-index: 1200;
+    /* start at top and stretch to full viewport to avoid horizontal shifts */
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .header__nav.open { display: flex; }
+
+  /* Panel sits above the dim overlay and contains the link list */
+  /* make the panel occupy the whole viewport on mobile to avoid shifting */
+  .header__nav .header__panel {
+    top: 80px;
+    width: 100%;
+    height: 100%;
+    background: rgba(12,12,12,0.94);
+    color: var(--text-color);
+    border-radius: 0;
+    padding: 56px 18px 18px; /* leave space for close button */
+    box-shadow: none;
+    backdrop-filter: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1250; /* ensure panel sits above overlay */
+  }
+
+  .header__nav .header__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+
+  .header__nav .header__list .header__link {
+    color: var(--text-color);
+    font-size: 1.05rem;
+    text-align: center;
+    padding: 8px 6px;
+  }
+
+  .header { position: relative; }
+}
+
+/* Mobile modal styles (single modal appended to body) */
+.mobile-modal { display: none; }
+.mobile-modal.open { display: block; }
+.mobile-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.56);
+  z-index: 1200;
+}
+.mobile-modal__content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  max-width: 440px;
+  background: rgba(12,12,12,0.88);
+  color: var(--text-color);
+  border-radius: 12px;
+  padding: 20px 18px 26px;
+  z-index: 1250;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mobile-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: 0;
+  color: var(--text-color);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.mobile-modal__nav .header__list { display: flex; flex-direction: column; gap: 12px; align-items: center; margin: 16px 0 0; }
+.mobile-modal__nav .header__link { font-size: 1.05rem; padding: 8px 6px; display: block; width: 100%; text-align: center; }
+
+/* Ensure cloned header list in the modal has consistent width across pages */
+.mobile-modal__nav .header__list {
+  width: 100%;
+  max-width: 420px; /* constant width across pages */
+  margin: 16px auto 0;
+  align-items: stretch;
+}
+.mobile-modal__nav .header__list .header__item {
+  width: 100%;
+}
+.mobile-modal__nav .header__list .header__link {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+}
+
+@media (min-width: 769px) {
+  .mobile-modal { display: none !important; }
+  /* Hide the modal/panel close X on desktop; keep it available on mobile */
+  .header__panel-close,
+  .mobile-modal__close {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+/* Close button inside panel */
+.header__panel-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 0;
+  color: var(--text-color);
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.header__panel { position: relative; }
+.header__panel-close svg { opacity: 0.95; }
+.header__panel-close:hover { background: rgba(255,255,255,0.04); border-radius: 8px; }
+.header__panel-close:focus { outline: 2px solid rgba(255,255,255,0.12); border-radius: 8px; }
+
+/* When JS adds this class the panel is hidden (used by header__panel-close) */
+.panel--hidden {
+  display: none !important;
+  opacity: 0;
+  transform: none !important;
+}
+
+/* large close button appended to the overlay to always close the modal */
+.header__overlay-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1260;
+  background: rgba(255,255,255,0.04);
+  border: 0;
+  color: var(--text-color);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+.header__overlay-close:hover { background: rgba(255,255,255,0.06); }
+.header__overlay-close svg { opacity: 0.95; }
+.burger__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-color);
+  margin: 4px 0;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.header__nav { display: block; }
+
+@media (max-width: 768px) {
+  .header__list { 
+    display: none; 
+    flex-direction: column; 
+    gap: 12px;
+    padding: 16px;
+  }
+  .header__burger { display: inline-flex; }
+  .header__nav.open .header__list { display: flex; background: rgba(0,0,0,0.04); position: absolute; top: 100%; right: 16px; min-width: 160px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); z-index: 1000; }
+  .header { position: relative; }
+}
+
+.header__link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--text-color);
+  padding-bottom: 4px;
+}
+
+/* Ensure hover doesn't change text color (bootstrap may override) */
+.header__link:hover {
+  color: var(--text-color) !important;
+}
+
+/* Псевдоелемент — сама лінія */
+.header__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: yellow;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+/* Анімація при наведенні */
+.header__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.work__list {
+    color: white;
+    text-align: left;
+    
+}
+
+.hero {
+      display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: -200px;
+    height: 100vh;  
+    padding-top: 300px;
+    background-image: url("../img/background.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: var(--background-color);
+}
+
+.hero__description {
+    max-width: 600px;
+}
+
+.hero__logo {
+    border-radius: 20px;
+}
+
+.hero__text {
+  background-color: var(--background-color);
+  outline: solid yellow 2px;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+}
+
+.article {
+  background-color: var(--color-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--color-shadow);
+  padding: 40px;
+}
+
+
+.article__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-graphite-dark);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 64px;
+  height: 64px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transform: translateY(40px) scale(0.95);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(.2,.9,.3,1), opacity 0.35s ease, box-shadow 0.2s ease;
+  pointer-events: none;
+}
+
+.to-top img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.to-top.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.to-top:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+}
+
+/* Smaller icon inside the circle */
+.to-top img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+
+.article__description {
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: 40px;
+}
+
+.footer {
+    background-color: var(--background-color);
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.footer__flex-elements {
+    display: flex;
+}
+
+.footer__list {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  justify-content: center;
+  align-items: end;
+  margin-left: auto;
+}
+
+.footer__link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--text-color);
+  padding-bottom: 4px;
+}
+
+/* Footer stack on small screens */
+@media (max-width: 600px) {
+  .footer__list {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-left: 0;
+    padding: 12px 0;
+  }
+  .footer__flex-elements {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+/* Price image adjustments */
+.price__img {
+  max-width: 100%;
+  height: auto;
+  width: 520px; /* default desktop width */
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .price__img { width: 420px; }
+}
+
+@media (max-width: 768px) {
+  .price__img { width: 320px; }
+}
+
+/* Ensure to-top always fixed to viewport — do not move into sections */
+.to-top.in-section {
+  /* remove absolute positioning that anchors it to a section */
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
+/* Псевдоелемент — сама лінія */
+.footer__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: yellow;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+/* Анімація при наведенні */
+.footer__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Prevent external CSS (e.g., Bootstrap) from changing footer link color on hover */
+.footer__link:hover {
+  color: var(--text-color) !important;
+}
+
+.footer__logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+}
+
+.footer__text {
+    text-align: center;
+}
+
+.footer__text::before {
+    content: "";
+    background-color: var(--text-color);
+    width: 100%;
+    height: 1px;
+    display: block;
+    margin-bottom: 20px;
+    opacity: 0.2;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+/* === Підзаголовки списків === */
+.article__list-title,
+.recomandation__title,
+.prohibitions__title,
+.duty__title,
+.membership__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-graphite-dark);
+  margin: 30px 0 15px;
+  border-left: 4px solid var(--color-accent);
+  padding-left: 10px;
+}
+
+/* === Опис під заголовком === */
+.membership__description {
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+/* === Списки === */
+.article__list,
+.recomandation__list,
+.prohibitions__list,
+.duty__list,
+.membership__list {
+  list-style: decimal inside;
+  padding-left: 20px;
+  margin-bottom: 40px;
+}
+
+.article__item,
+.recomandation__item,
+.prohibitions__item,
+.duty__item,
+.membership__item {
+  background-color: var(--color-bg-light);
+  border-left: 4px solid var(--color-border);
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  color: var(--background-color);
+}
+
+.article__item:hover,
+.recomandation__item:hover,
+.prohibitions__item:hover,
+.duty__item:hover,
+.membership__item:hover {
+  background-color: var(--color-bg-hover);
+  border-left-color: var(--color-accent);
+}
+
+/* === Текст у списках === */
+.artcle__item-text,
+.recomandation__text,
+.prohibitions__text,
+.duty__text,
+.membership__text {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-graphite);
+}
+
+
+
+/* === Інформаційні блоки === */
+.info__text,
+.info__text2,
+.info__text3 {
+  font-size: 1rem;
+  color: var(--color-graphite-dark);
+  background-color: var(--color-bg-light);
+  border-left: 4px solid var(--color-accent);
+  padding: 15px 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+/* === Адаптивність === */
+@media (max-width: 768px) {
+  .article {
+    padding: 25px;
+  }
+
+  .article__title {
+    font-size: 1.6rem;
+  }
+
+  .article__description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  .article {
+    padding: 20px;
+  }
+
+  .article__title {
+    font-size: 1.4rem;
+  }
+}
+
+/* Responsive adjustments for to-top button */
+@media (max-width: 480px) {
+  .to-top {
+    right: 16px;
+    bottom: 20px;
+    width: 48px;
+    height: 48px;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  .to-top.show { transform: translateY(0) scale(1); }
+
+  .to-top img { width: 36px; height: 36px; }
+}
+
+/* When the button is moved inside a section, the section must be positioned */
+.to-top-container {
+  position: relative;
+}
+
+.to-top.in-section {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+}
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Мінімум 320px — мобільна версія */
+@media (min-width: 320px) {
+  .container {
+    max-width: 320px;
+  }
+}
+
+/* Мінімум 768px — планшети */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+/* Мінімум 1200px — десктоп */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+}

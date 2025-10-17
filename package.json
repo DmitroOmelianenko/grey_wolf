@@ -1,0 +1,35 @@
+{
+  "name": "grey_wolf",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx parcel src/index.html",
+    "build": "parcel build src/index.html --no-cache --public-url /goit-js-hw-06-parcel/",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitroOmelianenko/grey_wolf.git"
+  },
+  "keywords": [
+    "gym",
+    "grey_wolf"
+  ],
+  "author": "grey_wolf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DmitroOmelianenko/grey_wolf/issues"
+  },
+  "homepage": "https://github.com/DmitroOmelianenko/grey_wolf#readme",
+  "dependencies": {
+    "parcel": "^2.16.0"
+  },
+  "devDependencies": {
+    "@parcel/optimizer-image": "^2.16.0",
+    "@parcel/transformer-image": "^2.16.0",
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "posthtml-include": "^2.0.1"
+  }
+}
