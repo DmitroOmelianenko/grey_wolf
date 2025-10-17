@@ -1,5 +1,6 @@
 {
   "name": "grey_wolf",
+  "homegape": "https://dmitroomelianenko.github.io/grey_wolf/",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/DmitroOmelianenko/grey_wolf#readme",
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "parcel": "^2.16.0"
   },
   "devDependencies": {
