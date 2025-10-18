@@ -3,34 +3,19 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main   # або 'master', якщо у тебе основна гілка так називається
+      - main  # або master, залежно від твоєї гілки
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      # 1️⃣ Клонування репозиторію
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # 2️⃣ Встановлення Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20   # або іншу версію, яка тобі потрібна
-          cache: 'npm'
-
-      # 3️⃣ Встановлення залежностей
-      - name: Install dependencies
-        run: npm ci
-
-      # 4️⃣ Збірка проєкту Parcel
-      - name: Build project
-        run: npm run build
-
-      # 5️⃣ Деплой зібраних файлів у GitHub Pages
-      - name: Deploy to GitHub Pages
+          node-version: 20
+      - run: npm install
+      - run: npm run build
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
