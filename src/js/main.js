@@ -31,6 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mobile menu: prefer toggling an existing .header__panel when present,
   // otherwise fall back to the modal implementation.
   (function() {
+    // Ensure header panels are hidden by default on small viewports so they
+    // don't appear open automatically. The burger logic toggles the
+    // "panel--hidden" class, so we add that class initially on mobile.
+    try {
+      if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+        const panels = Array.from(document.querySelectorAll('.header__panel'));
+        panels.forEach(p => p.classList.add('panel--hidden'));
+      }
+    } catch (err) {
+      // Fail silently — this is a nicety to ensure old browsers don't break.
+      // The rest of the menu wiring below remains functional.
+    }
+
     const burgers = Array.from(document.querySelectorAll('.header__burger'));
     if (!burgers.length) return;
 
@@ -106,30 +119,40 @@ document.addEventListener('DOMContentLoaded', () => {
       if (lastFocused) lastFocused.focus();
     }
 
-    // Attach to each burger: toggle panel if present, otherwise open modal
-    burgers.forEach(b => {
-      b.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        const panel = findPanelForBurger(b);
-        if (panel) {
-          // toggle hidden class
-          panel.classList.toggle(HIDDEN_CLASS);
-          // ensure panel is visible if it was hidden
-          if (!panel.classList.contains(HIDDEN_CLASS)) {
-            // focus first link inside
-            const firstLink = panel.querySelector('.header__list a');
-            if (firstLink) firstLink.focus();
-          } else {
-            b.focus();
-          }
-          return;
-        }
+    // Use event delegation so burger clicks are handled even if markup is
+    // dynamically changed or the element exists on multiple pages.
+    document.addEventListener('click', (ev) => {
+      const b = ev.target.closest('.header__burger');
+      if (!b) return;
+      ev.preventDefault();
 
-        // fallback to modal
+      const panel = findPanelForBurger(b);
+      if (panel) {
+        // toggle hidden class
+        panel.classList.toggle(HIDDEN_CLASS);
+        // Also toggle the nav "open" state so CSS rules that rely on
+        // .header__nav.open stay in sync with the panel visibility.
         const header = b.closest('header') || document.querySelector('header');
-        const headerList = header ? header.querySelector('.header__list') : null;
-        openModal(headerList);
-      });
+        const nav = header ? header.querySelector('.header__nav') : null;
+        if (nav) nav.classList.toggle('open');
+        // Update aria-expanded for accessibility
+        const expanded = !panel.classList.contains(HIDDEN_CLASS);
+        try { b.setAttribute('aria-expanded', expanded ? 'true' : 'false'); } catch (e) {}
+        // ensure panel is visible if it was hidden
+        if (!panel.classList.contains(HIDDEN_CLASS)) {
+          // focus first link inside
+          const firstLink = panel.querySelector('.header__list a');
+          if (firstLink) firstLink.focus();
+        } else {
+          b.focus();
+        }
+        return;
+      }
+
+      // fallback to modal
+      const header = b.closest('header') || document.querySelector('header');
+      const headerList = header ? header.querySelector('.header__list') : null;
+      openModal(headerList);
     });
   })();
 
