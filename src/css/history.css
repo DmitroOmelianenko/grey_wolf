@@ -1,0 +1,130 @@
+:root {
+    --background-color:  #383838;
+    --text-color: #ffffff;
+
+    /* Основна палітра */
+  --color-white: #ffffff;
+  --color-graphite-dark: #2f2f2f;
+  --color-graphite: #383838;
+  --color-text-secondary: #555555;
+
+  /* Фони та бордери */
+  --color-bg-light: #f9f9f9;
+  --color-bg-hover: #f1f1f1;
+  --color-border: #c0c0c0;
+  --color-shadow: rgba(0, 0, 0, 0.05);
+
+  /* Акценти */
+  --color-accent: yellow;
+
+  /* Контейнер */
+  --container-max-width: 1200px;
+
+}
+
+html {
+  scrollbar-gutter: stable; /* сучасне, елегантне рішення */
+}
+
+header {
+    border-bottom: var(--color-accent) solid 1px;
+     box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+     overflow-y: scroll;
+}
+
+.history__image {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fadeInZoom 1.2s ease forwards;
+  border: yellow solid 2px;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+    display: block;
+    width: 300px;
+
+     @media screen and (min-width: 1200px) {
+        width: 500px;
+
+        }
+}
+
+@keyframes fadeInZoom {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.history__description {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.history__description.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+ .history__description,
+  .history__vovk-before,
+  .history__description-vovk,
+  .history__vovk-after {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .history__vovk-after {
+    border: yellow solid 2px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 300px;
+
+     @media screen and (min-width: 1200px) {
+        width: 500px;
+
+        }
+  }
+
+  .history__vovk-before {
+    border: yellow solid 2px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 300px;
+
+    @media screen and (min-width: 1200px) {
+        width: 500px;
+
+        }
+  }
+
+  /* Різні напрямки — опційно */
+  .history__vovk-before { transform: translateX(-40px); }
+  .history__vovk-after  { transform: translateX(40px); }
+
+  /* Клас, який додаємо коли елемент у полі зору */
+  .visible {
+    opacity: 1;
+    transform: translate(0,0);
+  }
+
+  /* Діагностика: тимчасові бордери щоб бачити місця елементів */
+  .debug {
+    outline: 1px dashed rgba(0,0,0,0.08);
+    padding: 10px;
+  }
+
+  .history__title {
+    text-align: center;
+    margin-bottom: 100px;
+  }

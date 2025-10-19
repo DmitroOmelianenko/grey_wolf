@@ -60,58 +60,95 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   })();
+});
 
-  // -----------------------------
-  // Trainers carousel (preserved)
-  // -----------------------------
-  const track = document.querySelector('.trainers-section__track');
-  if (!track) return;
+document.addEventListener('DOMContentLoaded', () => {
+  // Селектор — переконайся, що імена класів точні
+  const elements = document.querySelectorAll(
+    '.history__description, .history__vovk-before, .history__description-vovk, .history__vovk-after'
+  );
 
-  const slides = Array.from(track.children);
-  const prevBtn = document.querySelector('.arrow--prev');
-  const nextBtn = document.querySelector('.arrow--next');
-  const dotsContainer = document.querySelector('.trainers-section__dots');
-  if (!prevBtn || !nextBtn || !dotsContainer) return;
+  // Функція для зручної діагностики
+  const debugLog = (msg, el) => {
+    // розкоментуй для консольної діагностики
+    // console.log(msg, el && el.className ? el.className : el);
+  };
 
-  let currentIndex = 0;
+  // Якщо браузер не підтримує IntersectionObserver — fallback
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach(el => el.classList.add('visible'));
+    debugLog('No IntersectionObserver — added visible to all');
+    return;
+  }
 
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'dot';
-    dot.type = 'button';
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => {
-      currentIndex = i;
-      updateCarousel();
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -10% 0px', // можна коригувати коли спрацьовує
+    threshold: 0.15 // 15% елемента в кадрі
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        debugLog('Intersecting -> visible added', entry.target);
+        // Якщо хочеш, щоб анімація була лише раз:
+        obs.unobserve(entry.target);
+      } else {
+        debugLog('Not intersecting', entry.target);
+        // Якщо хочеш, щоб анімація повторювалась при виході/повторному вході,
+        // прибери unobserve вище і НЕ додавай unobserve тут.
+      }
     });
-    dotsContainer.appendChild(dot);
-  });
+  }, observerOptions);
 
-  const dots = Array.from(dotsContainer.children);
+  elements.forEach(el => observer.observe(el));
+});
 
-  function updateCarousel() {
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+const today = new Date().getDay(); // неділя = 0
+document.querySelectorAll('.schedule-list li').forEach(li => {
+  if (Number(li.dataset.day) === today || (today >= 1 && today <= 5 && li.dataset.day == 1)) {
+    li.classList.add('today');
   }
-
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    updateCarousel();
-  });
-
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    updateCarousel();
-  });
-
-  function setSlideWidths() {
-    slides.forEach(slide => slide.style.minWidth = `${track.getBoundingClientRect().width}px`);
-    updateCarousel();
-  }
-
-  window.addEventListener('resize', setSlideWidths);
-  setSlideWidths();
 });
 
 
+
+function updateWorkStatus() {
+  const dayNames = ["Неділя","Понеділок","Вівторок","Середа","Четвер","П’ятниця","Субота"];
+  const now = new Date();
+  const day = now.getDay(); // 0 = Нд, 6 = Сб
+  const hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2,"0");
+  const timeString = `${hours}:${minutes}`;
+
+  let isOpen = false;
+
+  // Визначаємо робочі години
+  if(day >= 1 && day <= 5){ // Пн-Пт
+    const openTime = 8*60 + 30;  // 08:30
+    const closeTime = 21*60;     // 21:00
+    const currentTime = hours*60 + parseInt(minutes);
+    isOpen = currentTime >= openTime && currentTime <= closeTime;
+  } else { // Сб-Нд
+    const openTime = 10*60; // 10:00
+    const closeTime = 20*60; // 20:00
+    const currentTime = hours*60 + parseInt(minutes);
+    isOpen = currentTime >= openTime && currentTime <= closeTime;
+  }
+
+  document.getElementById("today-day").textContent = `Сьогодні: ${dayNames[day]}`;
+  document.getElementById("today-time").textContent = timeString;
+
+  const statusEl = document.getElementById("today-status");
+  if(isOpen){
+    statusEl.textContent = "Відчинено";
+    statusEl.className = "open";
+  } else {
+    statusEl.textContent = "Зачинено";
+    statusEl.className = "closed";
+  }
+}
+
+updateWorkStatus();
+setInterval(updateWorkStatus, 60000); // оновлення кожну хвилину

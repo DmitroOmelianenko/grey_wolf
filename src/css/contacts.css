@@ -25,8 +25,182 @@
 
 .header {
     background-color: var(--background-color);
+    border-bottom: var(--color-accent) solid 1px;
 }
 
 body {
     background-color: var(--background-color);
+}
+.work-schedule {
+    font-family: "Inter", sans-serif;
+    max-width: 300px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  }
+
+  .contacts {
+    margin-top: 30px;
+  }
+
+  .work-schedule h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #111;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+
+  .schedule-list {
+    margin: 12px 0;
+  }
+
+  .schedule-list div {
+    padding: 4px 0;
+    color: #333;
+    font-size: 15px;
+  }
+
+  .today-status {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  #today-status {
+    font-weight: 700;
+  }
+
+  .open {
+    color: #1aaf5d; /* зелений */
+  }
+
+  .closed {
+    color: #e63946; /* червоний */
+  }
+
+  span {
+    color: white;
+  }
+
+  .link {
+    color: black;
+    background-color: yellow;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 8px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+      width: max-content; 
+    display: block; 
+    margin-left: auto;
+    margin-top: 30px;
+  }
+
+  .ramka {
+    border: yellow solid 2px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    display: block;
+
+     @media screen and (min-width: 1200px) {
+        width: 500px;
+padding-left: 30px;
+    padding-bottom: 30px;
+        }
+  }
+
+  .contacts__flex { 
+    display: flex;
+      align-items: center; 
+      gap: 50px;
+    align-items: flex-start; 
+     flex-direction: column;
+    
+    @media screen and (min-width: 1200px) {
+     flex-direction: row;
+   
+    }
+  }
+
+  .socials__number-phone {
+    color: white;
+  }
+
+ .social-list {
+  list-style: none;
+  display: flex;
+  gap: 12px; /* відстань між іконками */
+  padding: 0;
+  margin: 0;
+}
+
+.social-list li {
+  width: 40px;   /* розмір кружечка */
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden; /* щоб фон не виходив за круг */
+}
+
+.social-list li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;  /* повністю заповнює li */
+  height: 100%;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  text-decoration: none; /* прибираємо підкреслення */
+}
+
+.social-list li a:hover {
+  background-color: yellow;
+}
+
+.social-list li img {
+  width: 20px;  /* розмір іконки */
+  height: 20px;
+  display: block;
+}
+
+.socials {
+    display: flex;
+    justify-content: space-between;
+    background-color: grey;
+    border-radius: 30px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+     align-items: center; 
+    margin-top: 50px;
+    flex-direction: column;
+    gap: 20px;
+
+    @media screen and (min-width: 1200px) {
+      flex-direction: row;
+        
+    }
+}
+
+.socials__img {
+    color: white;
+    fill: white;
+}
+
+
+li a {
+  fill: white; /* початковий колір іконки */
+  transition: color 0.3s;
+}
+
+li:hover a .icon {
+  fill: black; /* при ховері на li іконка стає чорною */
 }

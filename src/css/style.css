@@ -739,3 +739,7 @@ body {
     max-width: 1200px;
   }
 }
+
+.footer__text {
+  color: white;
+}
