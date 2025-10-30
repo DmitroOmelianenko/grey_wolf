@@ -156,16 +156,50 @@ function updateWorkStatus() {
 updateWorkStatus();
 setInterval(updateWorkStatus, 60000); // оновлення кожну хвилину
 
-import Swiper from "swiper";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+document.addEventListener('DOMContentLoaded', () => {
+  const gallery = document.querySelector('.galery__images');
+  if (!gallery) return;
 
-// Ініціалізація слайдера
-const swiper = new Swiper(".swiper", {
-  modules: [Navigation, Pagination, Autoplay, EffectFade],
-  loop: true,
-  effect: "fade",
-  speed: 1000,
-  autoplay: { delay: 4000 },
-  pagination: { el: ".swiper-pagination", clickable: true },
-  navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+  const images = Array.from(document.querySelectorAll('.galery__image'));
+  const btnLeft = document.querySelector('.button__left');
+  const btnRight = document.querySelector('.button__right');
+
+  console.log(images, btnLeft, btnRight);
+
+  if (images.length === 0) return;
+
+  let currentIndex = 0;
+
+  // ✅ Функція показу зображення
+  function showImage(index) {
+    images.forEach((img, i) => {
+      img.classList.toggle('active', i === index);
+    });
+
+    if (btnLeft) btnLeft.disabled = index === 0;
+    if (btnRight) btnRight.disabled = index === images.length - 1;
+  }
+
+  // Показуємо перше зображення при завантаженні
+  showImage(0);
+
+  if (btnLeft) {
+    btnLeft.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showImage(currentIndex);
+      }
+    });
+  }
+
+  if (btnRight) {
+    btnRight.addEventListener('click', () => {
+      if (currentIndex < images.length - 1) {
+        currentIndex++;
+        showImage(currentIndex);
+      }
+    });
+  }
 });
+
+
