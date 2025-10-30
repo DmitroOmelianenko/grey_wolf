@@ -1,0 +1,35 @@
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 8px; /* 🔹 Менші відступи зліва та справа */
+  box-sizing: border-box;
+}
+
+/* Мінімум 320px — мобільна версія */
+@media (min-width: 320px) {
+  .container {
+    max-width: 320px;
+    padding: 0 10px; /* трохи більший відступ на мобільних */
+  }
+}
+
+/* Мінімум 768px — планшети */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 12px;
+  }
+}
+
+/* Мінімум 1200px — десктоп */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 15px; /* стандартний відступ для великих екранів */
+  }
+}
+
+.footer__text {
+  color: white;
+}

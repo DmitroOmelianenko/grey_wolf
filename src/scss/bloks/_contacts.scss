@@ -1,26 +1,4 @@
-:root {
-    --background-color:  #383838;
-    --text-color: #ffffff;
-
-    /* Основна палітра */
-  --color-white: #ffffff;
-  --color-graphite-dark: #2f2f2f;
-  --color-graphite: #383838;
-  --color-text-secondary: #555555;
-
-  /* Фони та бордери */
-  --color-bg-light: #f9f9f9;
-  --color-bg-hover: #f1f1f1;
-  --color-border: #c0c0c0;
-  --color-shadow: rgba(0, 0, 0, 0.05);
-
-  /* Акценти */
-  --color-accent: yellow;
-
-  /* Контейнер */
-  --container-max-width: 1200px;
-
-}
+@import "../variebles";
 
 
 .header {

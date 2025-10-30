@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Podkova:wght@400..800&family=Ubuntu+Condensed&display=swap');
+
 :root {
     --background-color:  #383838;
     --text-color: #ffffff;
@@ -20,10 +22,9 @@
   /* Контейнер */
   --container-max-width: 1200px;
 
+  // Fonts
+  --base-font: "Ubuntu Condensed", sans-serif;
+  --podkova-font: 'Podkova', serif;
+
 }
 
-
-
-body {
-    background-color: var(--background-color);
-}

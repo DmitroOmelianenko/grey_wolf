@@ -1,0 +1,33 @@
+@import "../variebles";
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-top: -200px;
+  height: 100vh;
+  background-image: url("../img/background.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: var(--background-color);
+  padding: 100px 0;
+  font-family: var(--podkova-font);
+}
+
+.hero__description {
+  max-width: 600px;
+}
+
+.hero__logo {
+  border-radius: 20px;
+}
+
+.hero__text {
+  background-color: var(--background-color);
+  outline: solid yellow 2px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-left: auto;
+}

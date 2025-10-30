@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
   // -----------------------------
   // To-top button: show/hide + smooth scroll
@@ -152,3 +155,17 @@ function updateWorkStatus() {
 
 updateWorkStatus();
 setInterval(updateWorkStatus, 60000); // оновлення кожну хвилину
+
+import Swiper from "swiper";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+
+// Ініціалізація слайдера
+const swiper = new Swiper(".swiper", {
+  modules: [Navigation, Pagination, Autoplay, EffectFade],
+  loop: true,
+  effect: "fade",
+  speed: 1000,
+  autoplay: { delay: 4000 },
+  pagination: { el: ".swiper-pagination", clickable: true },
+  navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+});

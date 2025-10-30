@@ -1,0 +1,97 @@
+@import "../variebles";
+
+.footer {
+    background-color: var(--background-color);
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.footer__flex-elements {
+    display: flex;
+}
+
+.footer__list {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  justify-content: center;
+  align-items: end;
+  margin-left: auto;
+}
+
+.footer__link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--text-color);
+  padding-bottom: 4px;
+}
+
+/* Footer stack on small screens */
+@media (max-width: 600px) {
+  .footer__list {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-left: 0;
+    padding: 12px 0;
+  }
+  .footer__flex-elements {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.footer__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: yellow;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+/* Анімація при наведенні */
+.footer__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Prevent external CSS (e.g., Bootstrap) from changing footer link color on hover */
+.footer__link:hover {
+  color: var(--text-color) !important;
+}
+
+.footer__logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+}
+
+.footer__text {
+    text-align: center;
+}
+
+.footer__text::before {
+    content: "";
+    background-color: var(--text-color);
+    width: 100%;
+    height: 1px;
+    display: block;
+    margin-bottom: 20px;
+    opacity: 0.2;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}

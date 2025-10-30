@@ -26,11 +26,14 @@
   "homepage": "https://github.com/DmitroOmelianenko/grey_wolf#readme",
   "dependencies": {
     "gh-pages": "^6.3.0",
-    "parcel": "^2.16.0"
+    "parcel": "^2.16.0",
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
+    "@parcel/config-default": "^2.16.0",
     "@parcel/optimizer-image": "^2.16.0",
     "@parcel/transformer-image": "^2.16.0",
+    "@parcel/transformer-sass": "^2.16.0",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^2.0.1"
   }

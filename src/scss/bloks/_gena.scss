@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import "../variebles";
+
+.gena {
+    background-color: yellow;
+    color: black;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 200px;
+
+    &__title {
+        font-size: 54px;
+        text-align: center;
+        font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: normal;
+  padding-top: 50px;
+    }
+}
