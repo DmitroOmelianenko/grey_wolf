@@ -1,79 +1,127 @@
-@import "../variebles";
+.trainers {
+  padding: 60px 0;
+  background: #f9f9f9;
 
-li {
+  &__list {
     list-style: none;
-}
+    margin: 0;
+    padding: 0;
+  }
 
-body {
-  color: black;
-  background-color: var(--background-color);
-}
+  &__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 40px;
 
-.trainer-card__photo {
-  border: 2px solid yellow;
-  border-radius: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 150px;
+  // чергування напрямку для кожного другого елемента (на десктопі)
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+  }
 
-  @media screen and (min-width: 1200px) {
-    width: 350px;
+ 
+
+
+  // адаптація для мобільних
+  @media (max-width: 1200px) {
+    // 🔹 переписує direction навіть для парних
+    &, &:nth-child(even) {
+      flex-direction: column;
+    }
+
+    text-align: center;
+    gap: 20px;
   }
 }
 
-.trainer-card {
-  display: flex;
-  flex-direction: column;
-  
-
-  @media screen and (min-width: 1200px) {
-    flex-direction: row;
-  }
+ &__item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: #9a9a9a;
 }
 
-.trainer__flex {
-  display: flex;
-  flex-direction: column;
-  
-  
-
-  @media screen and (min-width: 1200px) {
-    margin-left: 20px;
-  }
+&__item:not(:last-child)::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: #9a9a9a;
+  margin-top: 40px;
 }
 
-.trainers-section__track {
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-  padding-left: 0;
+ &__title {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+    font-family: var(--podkova-font);
+  }
 
-  @media screen and (min-width: 1200px) {
+
+  &__img {
+    width: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     
+    // на ПК обрізаємо половину фото по висоті (вгору)
+
+    @media (min-width: 1200px) {
+      width: 500px;
+      height: auto;
+    }
   }
-}
 
-.trainer-card__name {
-  padding-top: 30px;
-  color: yellow;
-  text-align: center;
+  
 
-  @media screen and (min-width: 1200px) {
+  &__text {
+    width: 50%;
+    padding: 0 20px;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  &__name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 16px;
     text-align: left;
+
+    @media (max-width: 1200px) {
+      text-align: center;
+    }
+  }
+
+  &__description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    white-space: pre-line;
+
+    @media (max-width: 1200px) {
+      text-align: center;
+    }
   }
 }
 
-.trainer-card__text {
-  margin-top: 20px;
-  max-width: 600px;
-  text-align: justify;
-  color: white;
-
+.flexx {
+  display: flex;
+  flex-direction: column;
 }
 
-.trainers-section__title {
-  text-align: center;
-  color: white;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
+
+  .wit {
+    height: 600px;
+
+    @media screen and (min-width: 1200px) {
+      width: 400px;
+    }
+  }
