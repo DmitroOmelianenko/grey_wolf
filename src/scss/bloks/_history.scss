@@ -1,108 +1,101 @@
-@import "../variebles";
-
-html {
-  scrollbar-gutter: stable; /* сучасне, елегантне рішення */
+.history {
+   background: linear-gradient(180deg, #000 0%, #111 40%, #fff 100%);
+  color: #f5f5f5;
+  padding: 80px 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
-header {
-    border-bottom: var(--color-accent) solid 1px;
-     box-sizing: border-box;
+.history .container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-body {
-    background-color: var(--background-color);
-     overflow-y: scroll;
+.history__title {
+  color: #f5b800;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.history__title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #f5b800;
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+.history__block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 80px;
+  flex-wrap: wrap;
+}
+
+.history__block.reverse {
+  flex-direction: row-reverse;
 }
 
 .history__image {
-  opacity: 0;
-  transform: scale(0.9);
-  animation: fadeInZoom 1.2s ease forwards;
-  border: yellow solid 2px;
+  width: 45%;
   border-radius: 20px;
-  margin-left: auto;
-  margin-right: auto;
-    display: block;
-    width: 300px;
-
-     @media screen and (min-width: 1200px) {
-        width: 500px;
-
-        }
+  border: 3px solid #f5b800;
+  box-shadow: 0 0 25px rgba(245, 184, 0, 0.4);
+  transition: 0.4s ease;
 }
 
-@keyframes fadeInZoom {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.history__image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px rgba(245, 184, 0, 0.8);
 }
 
 .history__description {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
+  width: 50%;
+  line-height: 1.7;
+  font-size: 1rem;
+  text-align: left;
+  color: #eaeaea;
 }
 
-.history__description.visible {
-  opacity: 1;
-  transform: translateY(0);
+.history__photo {
+  display: flex;
+  justify-content: center;
 }
 
- .history__description,
-  .history__vovk-before,
-  .history__description-vovk,
-  .history__vovk-after {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
+.history__vovk-before {
+  width: 70%;
+  max-width: 700px;
+  border-radius: 20px;
+  border: 3px solid #f5b800;
+  box-shadow: 0 0 25px rgba(245, 184, 0, 0.4);
+  transition: 0.4s;
+}
 
-  .history__vovk-after {
-    border: yellow solid 2px;
-    border-radius: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 300px;
+.history__vovk-before:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 35px rgba(245, 184, 0, 0.8);
+}
 
-     @media screen and (min-width: 1200px) {
-        width: 500px;
-
-        }
-  }
-
-  .history__vovk-before {
-    border: yellow solid 2px;
-    border-radius: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 300px;
-
-    @media screen and (min-width: 1200px) {
-        width: 500px;
-
-        }
-  }
-
-  /* Різні напрямки — опційно */
-  .history__vovk-before { transform: translateX(-40px); }
-  .history__vovk-after  { transform: translateX(40px); }
-
-  /* Клас, який додаємо коли елемент у полі зору */
-  .visible {
-    opacity: 1;
-    transform: translate(0,0);
-  }
-
-  /* Діагностика: тимчасові бордери щоб бачити місця елементів */
-  .debug {
-    outline: 1px dashed rgba(0,0,0,0.08);
-    padding: 10px;
-  }
-
-  .history__title {
+@media (max-width: 992px) {
+  .history__block {
+    flex-direction: column;
     text-align: center;
-    margin-bottom: 100px;
   }
+  .history__image,
+  .history__description {
+    width: 90%;
+  }
+  .history__description {
+    text-align: justify;
+  }
+  .history__title {
+    font-size: 2rem;
+  }
+}

@@ -6,7 +6,7 @@
   justify-content: center;
   color: white;
   margin-top: -120px;
-  height: 100vh;
+  height: 700px;
   background-image: url("../img/background.webp");
   background-repeat: no-repeat;
   background-position: center;
@@ -14,6 +14,13 @@
   background-color: var(--background-color);
   padding: 100px 0;
   font-family: var(--podkova-font);
+  padding-top: 300px;
+
+  @media screen and (min-width: 1200px) {
+    padding-top: 200px;
+    height: 800px;
+
+  }
 
   &__title {
      font-size: 35px;

@@ -1,14 +1,43 @@
 @import "../variebles";
 
 .header { 
-    background-color: var(--color-graphite);
-    font-family: var(--podkova-font);
-    background: transparent;
-    box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px; /* 🔹 стабільна висота */
+  display: flex; /* 🔹 щоб вирівняти елементи */
+  align-items: center; /* 🔹 по вертикалі */
+  justify-content: space-between; /* 🔹 або інше, залежно від дизайну */
 
-    @media screen and (min-width: 1200px) {
-        padding-top: 30px;
-     }
+  box-sizing: border-box;
+  font-family: var(--podkova-font);
+
+  /* фон і ефекти */
+  background-color: rgba(60, 60, 60, 0.8); /* сірий, напівпрозорий */
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  /* 🔹 padding без вертикальних перекриттів */
+  padding: 0 16px;
+
+  /* 🔹 для iPhone (не дає “стрибу” при notch-зоні) */
+  padding-top: env(safe-area-inset-top, 0px);
+
+  @media screen and (min-width: 1200px) {
+    padding: 0 24px;
+  }
+}
+
+
+/* Мобільна адаптація */
+@media (max-width: 768px) {
+  header {
+    backdrop-filter: blur(10px);
+  }
 }
 
 .flex {
@@ -31,8 +60,8 @@
      height: 50px;
      
      @media screen and (min-width: 1200px) {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
      }
      
 }
@@ -106,14 +135,16 @@
     justify-content: flex-start;
   }
 
-  .header__nav.open { display: flex; }
+  .header__nav.open { display: flex; 
+  
+    
+  }
 
   /* Panel sits above the dim overlay and contains the link list */
   /* make the panel occupy the whole viewport on mobile to avoid shifting */
   .header__nav .header__panel {
     position: relative;
     width: 100%;
-    height: 100%;
     background: rgba(12,12,12,0.96);
     color: var(--text-color);
     border-radius: 0;
@@ -150,8 +181,6 @@
   .header__nav .header__list .header__item {
     width: 100%;
   }
-
-  .header { position: relative; }
 }
 
 /* Mobile modal styles (single modal appended to body) */
@@ -286,7 +315,6 @@
   }
   .header__burger { display: inline-flex; }
   .header__nav.open .header__list { display: flex; background: rgba(0,0,0,0.04); top: 100%; right: 16px; min-width: 160px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); z-index: 1000; }
-  .header { position: relative; }
 }
 
 .header__link {
@@ -299,8 +327,11 @@
   text-decoration: none;
   color: var(--text-color);
   padding-bottom: 4px;
-  width: 250px;
   text-align: left;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 
   @media screen and (min-width: 1200px) {
     width: 100%;
@@ -350,4 +381,8 @@
     color: white;
     text-align: left;
     
+}
+
+main, section:first-of-type {
+  padding-top: 264px; /* або трохи більше, якщо треба відстань */
 }

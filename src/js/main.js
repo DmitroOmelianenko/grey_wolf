@@ -60,46 +60,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // -----------------------------
-// Intersection Observer для історії
+// Показ сьогоднішнього дня, часу та статусу залу
 // -----------------------------
-document.addEventListener('DOMContentLoaded', () => {
-  const elements = document.querySelectorAll(
-    '.history__description, .history__vovk-before, .history__description-vovk, .history__vovk-after'
-  );
+function updateTodayStatus() {
+  const now = new Date();
+  const day = now.getDay(); // 0 = неділя, 1 = понеділок, ...
+  const hours = now.getHours();
+  const minutes = now.getMinutes().toString().padStart(2, "0");
 
-  if (!('IntersectionObserver' in window)) {
-    elements.forEach(el => el.classList.add('visible'));
-    return;
-  }
+  // Українські назви днів
+  const daysUA = [
+    "Неділя",
+    "Понеділок",
+    "Вівторок",
+    "Середа",
+    "Четвер",
+    "П’ятниця",
+    "Субота"
+  ];
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -10% 0px',
-    threshold: 0.15
-  };
+  const isWeekend = day === 0 || day === 6; // Сб, Нд
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
+  // Графік роботи
+  const schedule = isWeekend
+    ? { open: 10.5, close: 20 } // 10:30–20:00
+    : { open: 8.5, close: 21 }; // 08:30–21:00
 
-  elements.forEach(el => observer.observe(el));
-});
+  const currentTime = hours + minutes / 60;
+  const isOpen = currentTime >= schedule.open && currentTime < schedule.close;
 
+  // Запис у DOM
+  document.getElementById("today-day").textContent = `Сьогодні: ${daysUA[day]}`;
+  document.getElementById("today-time").textContent = `${hours}:${minutes}`;
+  document.getElementById("today-status").textContent = isOpen
+    ? "Відчинено"
+    : "Зачинено";
 
-// -----------------------------
-// Підсвічування сьогоднішнього дня у розкладі
-// -----------------------------
-const today = new Date().getDay(); // неділя = 0
-document.querySelectorAll('.schedule-list li').forEach(li => {
-  if (Number(li.dataset.day) === today || (today >= 1 && today <= 5 && li.dataset.day == 1)) {
-    li.classList.add('today');
-  }
-});
+  // Зміна кольору залежно від статусу
+  const statusEl = document.getElementById("today-status");
+  statusEl.style.color = isOpen ? "#22c55e" : "#ef4444";
+}
+
+// Запуск одразу і кожну хвилину
+updateTodayStatus();
+setInterval(updateTodayStatus, 60000);
 
 
 // -----------------------------
@@ -135,3 +139,4 @@ document.addEventListener("DOMContentLoaded", function () {
   showImage(currentIndex);
 });
 
+ 
