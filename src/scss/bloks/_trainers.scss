@@ -101,14 +101,15 @@
   }
 
   &__description {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.6;
-    white-space: pre-line;
+      text-align: left;            /* вирівнює текст по лівому краю */
+  white-space: pre-line;       /* зберігає переноси та абзаци з HTML */
+  line-height: 1.6;            /* комфортна висота рядка */
+  font-size: 1rem;             /* стандартний розмір шрифту */
+  color: #222;                 /* спокійний, читабельний колір */
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 600px; 
 
-    @media (max-width: 1200px) {
-      text-align: center;
-    }
   }
 }
 

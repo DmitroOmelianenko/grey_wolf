@@ -21,8 +21,6 @@
   z-index: 1000;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
-  /* 🔹 padding без вертикальних перекриттів */
-  padding: 0 16px;
 
   /* 🔹 для iPhone (не дає “стрибу” при notch-зоні) */
   padding-top: env(safe-area-inset-top, 0px);
