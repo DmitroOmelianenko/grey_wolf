@@ -28,7 +28,6 @@ export default defineConfig({
   },
 
   plugins: [
-    // 🧩 Мінімізація HTML
     htmlMinifier({
       collapseWhitespace: true,
       removeComments: true,
@@ -39,7 +38,19 @@ export default defineConfig({
       minifyJS: true,
     }),
 
-    // ⚡️ PWA + кешування великих файлів
+    viteImagemin({
+      gifsicle: { optimizationLevel: 3 },
+      optipng: { optimizationLevel: 5 },
+      mozjpeg: { quality: 80 },
+      svgo: {
+        plugins: [
+          { name: "removeViewBox", active: false },
+          { name: "removeEmptyAttrs", active: true },
+        ],
+      },
+      webp: { quality: 80 },
+    }),
+
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.webp", "robots.txt", "apple-touch-icon.png"],
@@ -58,23 +69,21 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,webp,png,jpg,jpeg,svg}"],
-        // ✅ Дозволяємо кеш до 10 МБ
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
-      },
-    }),
-
-    // 📦 Оптимізація зображень
-    viteImagemin({
-      gifsicle: { optimizationLevel: 3 },
-      optipng: { optimizationLevel: 5 },
-      mozjpeg: { quality: 80 },
-      svgo: {
-        plugins: [
-          { name: "removeViewBox", active: false },
-          { name: "removeEmptyAttrs", active: true },
+        globIgnores: [
+          "**/img/IMG_1686.jpeg",
+          "**/img/IMG_1693.jpeg",
+          "**/img/IMG_1695.jpeg",
+          "**/img/IMG_1700.jpeg",
+          "**/img/IMG_1704.jpeg",
+          "**/img/IMG_1719.jpeg",
+          "**/img/IMG_1725.jpeg",
+          "**/img/IMG_1735.jpeg",
+          "**/img/dudka.webp",
+          "**/img/harchenkoulia.webp",
+          "**/img/lytvynolena.webp",
         ],
       },
-      webp: { quality: 80 },
     }),
   ],
 
