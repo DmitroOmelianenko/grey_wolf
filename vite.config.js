@@ -1,12 +1,10 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  root: 'src',           // вказує, що index.html лежить у src
-  publicDir: '../public', // каже Vite, де шукати статичні файли
+  root: 'src',
+  publicDir: '../public',
+  base: '/grey_wolf/', // ← ключовий рядок
   build: {
-    outDir: '../dist',   // куди збирати сайт
-  },
-  server: {
-    open: true,
+    outDir: '../dist',
   },
 })
