@@ -6,7 +6,7 @@ import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
 
 export default defineConfig({
-  base: "./", // щоб правильно працювало при деплої на GitHub Pages або Netlify
+  base: "./",
 
   build: {
     outDir: "dist",
@@ -28,7 +28,7 @@ export default defineConfig({
   },
 
   plugins: [
-    // 🧩 Стиснення HTML
+    // 🧩 Мінімізація HTML
     htmlMinifier({
       collapseWhitespace: true,
       removeComments: true,
@@ -39,29 +39,7 @@ export default defineConfig({
       minifyJS: true,
     }),
 
-    VitePWA({
-      registerType: 'autoUpdate',
-      workbox: {
-        // дозволяє кешувати великі файли (до 10 MB)
-        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024
-      }
-    }),
-
-    // 📦 Оптимізація зображень (jpg, png, webp, svg)
-    viteImagemin({
-      gifsicle: { optimizationLevel: 3 },
-      optipng: { optimizationLevel: 5 },
-      mozjpeg: { quality: 80 },
-      svgo: {
-        plugins: [
-          { name: "removeViewBox", active: false },
-          { name: "removeEmptyAttrs", active: true },
-        ],
-      },
-      webp: { quality: 80 },
-    }),
-
-    // ⚡️ PWA (для кешування статичних файлів)
+    // ⚡️ PWA + кешування великих файлів
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.webp", "robots.txt", "apple-touch-icon.png"],
@@ -80,7 +58,23 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,webp,png,jpg,jpeg,svg}"],
+        // ✅ Дозволяємо кеш до 10 МБ
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
+    }),
+
+    // 📦 Оптимізація зображень
+    viteImagemin({
+      gifsicle: { optimizationLevel: 3 },
+      optipng: { optimizationLevel: 5 },
+      mozjpeg: { quality: 80 },
+      svgo: {
+        plugins: [
+          { name: "removeViewBox", active: false },
+          { name: "removeEmptyAttrs", active: true },
+        ],
+      },
+      webp: { quality: 80 },
     }),
   ],
 
