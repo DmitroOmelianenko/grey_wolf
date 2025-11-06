@@ -1,3 +1,6 @@
+import '../scss/main.scss'
+
+
 document.addEventListener('DOMContentLoaded', () => {
   // -----------------------------
   // To-top button: show/hide + smooth scroll
