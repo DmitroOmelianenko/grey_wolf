@@ -39,6 +39,14 @@ export default defineConfig({
       minifyJS: true,
     }),
 
+    VitePWA({
+      registerType: 'autoUpdate',
+      workbox: {
+        // дозволяє кешувати великі файли (до 10 MB)
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024
+      }
+    }),
+
     // 📦 Оптимізація зображень (jpg, png, webp, svg)
     viteImagemin({
       gifsicle: { optimizationLevel: 3 },
