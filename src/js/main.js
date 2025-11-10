@@ -152,6 +152,5 @@ const rulesBtn = document.querySelector(".rules-btn");
 const rulesSection = document.querySelector(".rules");
 
 rulesBtn.addEventListener("click", () => {
-  rulesSection.style.display =
-    rulesSection.style.display === "block" ? "none" : "block";
+  rulesSection.classList.toggle("show");
 });
