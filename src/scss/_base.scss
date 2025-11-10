@@ -33,3 +33,115 @@
 .footer__text {
   color: white;
 }
+
+:root {
+      --accent: #333;
+      --accent-strong: #111;
+      --bg: #f9f9f9;
+      --text: #222;
+      --muted: #666;
+      --border: #ddd;
+      --radius: 12px;
+      --max-width: 900px;
+    }
+
+    body {
+      font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      line-height: 1.7;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    main {
+      background: #fff;
+      max-width: var(--max-width);
+      padding: 3rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent-strong);
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0 0 1rem 1.25rem;
+      padding: 0;
+    }
+
+    ul li::before {
+      content: "• ";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    ul li {
+      margin-bottom: 0.4rem;
+    }
+
+    .note {
+      background: #f3f3f3;
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      border-radius: var(--radius);
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      white-space: pre-line;
+    }
+
+    .back-link {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: background 0.25s ease;
+    }
+
+    .back-link:hover {
+      background: var(--accent-strong);
+    }
+
+    .back-wrapper {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 2rem 1.25rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
