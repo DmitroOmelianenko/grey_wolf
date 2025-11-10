@@ -139,3 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
     showImage(currentIndex);
   }
 });
+
+
+window.addEventListener("hashchange", () => {
+  if (location.hash === "#ruless") {
+    window.location.replace("/ruless.html");
+  }
+});
