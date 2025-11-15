@@ -23,11 +23,15 @@
 .history__title::after {
   content: '';
   display: block;
-  width: 80px;
+  width: 200px;
   height: 3px;
   background: #f5b800;
   margin: 15px auto 0;
   border-radius: 2px;
+
+  @media screen and (min-width: 1100px) {
+    width: 500px;
+  }
 }
 
 .history__block {

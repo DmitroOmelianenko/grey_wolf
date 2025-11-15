@@ -175,6 +175,7 @@
     padding: 12px 10px; /* bigger touch targets */
   }
 
+
   /* ensure each list item fills the available width inside the panel */
   .header__nav .header__list .header__item {
     width: 100%;
@@ -367,6 +368,10 @@
   transform-origin: right;
   transition: transform 0.3s ease;
   }
+}
+
+.header_social {
+  margin-bottom: 0;
 }
 
 /* Анімація при наведенні */
