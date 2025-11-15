@@ -1,12 +1,10 @@
-import { defineConfig } from "vite";
-import { VitePWA } from "vite-plugin-pwa";
-import viteImagemin from "vite-plugin-imagemin";
-import htmlMinifier from "vite-plugin-html-minifier";
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
+import { defineConfig } from 'vite'
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
+import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: "./",
+  base: "/grey_wolf/",
 
   build: {
     outDir: "dist",
@@ -16,41 +14,21 @@ export default defineConfig({
     minify: "esbuild",
     rollupOptions: {
       output: {
-        manualChunks: undefined,
-      },
-    },
+        manualChunks: undefined
+      }
+    }
   },
 
   css: {
     postcss: {
-      plugins: [autoprefixer(), cssnano()],
-    },
+      plugins: [
+        autoprefixer(),
+        cssnano()
+      ]
+    }
   },
 
   plugins: [
-    htmlMinifier({
-      collapseWhitespace: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      removeEmptyAttributes: true,
-      minifyCSS: true,
-      minifyJS: true,
-    }),
-
-    viteImagemin({
-      gifsicle: { optimizationLevel: 3 },
-      optipng: { optimizationLevel: 5 },
-      mozjpeg: { quality: 80 },
-      svgo: {
-        plugins: [
-          { name: "removeViewBox", active: false },
-          { name: "removeEmptyAttrs", active: true },
-        ],
-      },
-      webp: { quality: 80 },
-    }),
-
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.webp", "robots.txt", "apple-touch-icon.png"],
@@ -61,15 +39,14 @@ export default defineConfig({
         theme_color: "#ffffff",
         icons: [
           {
-            src: "/favicon.webp",
+            src: "/grey_wolf/favicon.webp",
             sizes: "192x192",
-            type: "image/webp",
-          },
-        ],
+            type: "image/webp"
+          }
+        ]
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,webp,png,jpg,jpeg,svg}"],
-        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
         globIgnores: [
           "**/img/IMG_1686.jpeg",
           "**/img/IMG_1693.jpeg",
@@ -81,14 +58,15 @@ export default defineConfig({
           "**/img/IMG_1735.jpeg",
           "**/img/dudka.webp",
           "**/img/harchenkoulia.webp",
-          "**/img/lytvynolena.webp",
+          "**/img/lytvynolena.webp"
         ],
-      },
-    }),
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024
+      }
+    })
   ],
 
   server: {
     open: true,
-    port: 5173,
-  },
-});
+    port: 5173
+  }
+})

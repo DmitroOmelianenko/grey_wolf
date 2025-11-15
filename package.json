@@ -1,52 +1,21 @@
 {
   "name": "grey_wolf",
-  "homegape": "https://dmitroomelianenko.github.io/grey_wolf/",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "gh-pages -d dist",
-    "predeploy": "npm run build"
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DmitroOmelianenko/grey_wolf.git"
-  },
-  "keywords": [
-    "gym",
-    "grey_wolf"
-  ],
-  "author": "grey_wolf",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DmitroOmelianenko/grey_wolf/issues"
-  },
-  "homepage": "https://github.com/DmitroOmelianenko/grey_wolf#readme",
   "dependencies": {
-    "gh-pages": "^6.3.0",
     "swiper": "^12.0.3"
   },
   "devDependencies": {
-    "@parcel/config-default": "2.16.1",
-    "@parcel/core": "2.16.1",
-    "@parcel/optimizer-image": "^2.16.0",
-    "@parcel/transformer-image": "2.16.1",
-    "@parcel/transformer-sass": "^2.16.0",
     "@vitejs/plugin-react": "^5.1.0",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.22",
     "cssnano": "^7.1.2",
-    "imagemin-cli": "^8.0.0",
-    "imagemin-mozjpeg": "^10.0.0",
-    "imagemin-webp": "^8.0.0",
     "postcss": "^8.5.6",
-    "posthtml-include": "^2.0.1",
     "sass": "^1.93.3",
-    "sharp": "^0.33.5",
     "vite": "^7.2.1",
-    "vite-plugin-html-minifier": "^1.0.5",
-    "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-pwa": "^1.1.0"
   }
 }
