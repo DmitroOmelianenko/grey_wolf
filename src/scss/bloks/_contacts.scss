@@ -1,8 +1,12 @@
 .contacts {
   background-color: #fff;
   color: #111;
-  padding: 80px 0;
+  padding: 0;
   text-align: center;
+
+  @media screen and (min-width: 1200px) {
+    padding: 80px;
+  }
 }
 
 .contacts__flex {

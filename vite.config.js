@@ -4,7 +4,7 @@ import cssnano from 'cssnano'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: "/grey_wolf/",
+  base: "./",
 
   build: {
     outDir: "dist",
