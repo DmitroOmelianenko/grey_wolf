@@ -94,13 +94,12 @@
   padding-right: 12px;
 }
 
-/* Individual header parts - desktop/base styles */
 .header__panel {
-  /* panel wrapper for header links */
   position: relative;
   display: flex;
-  align-items: center;
-  gap: 12px;
+
+
+  width: 100%;
   padding: 8px 12px;
   background: transparent;
   border-radius: 8px;
@@ -354,6 +353,8 @@
   height: 2px;
   background-color: yellow;
   transform-origin: right;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
   
 
   @media screen and (min-width: 1200px) {
